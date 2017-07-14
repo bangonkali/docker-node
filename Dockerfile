@@ -19,7 +19,8 @@ RUN apt-get install -y software-properties-common \
 RUN curl -sS https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - \
     && apt-get update && apt-get install -y apt-transport-https default-jre default-jdk \
     && echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list \
-    && apt-get update && apt-get install -y logstash
+    && apt-get update && apt-get install -y logstash \
+    && /usr/share/logstash/bin/logstash-plugin install logstash-output-loggly
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
